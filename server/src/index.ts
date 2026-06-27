@@ -2,11 +2,15 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import dns from 'dns';
 import authRoutes from './routes/auth';
 import eventRoutes from './routes/events';
 import searchRoutes from './routes/search.routes';
 
 dotenv.config();
+
+// Change DNS
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
