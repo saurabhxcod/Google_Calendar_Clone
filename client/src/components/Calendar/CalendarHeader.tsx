@@ -6,6 +6,7 @@ import { useCalendar } from '../../context/CalendarContext';
 import { useAuth } from '../../context/AuthContext';
 import MiniCalendar from './MiniCalendar';
 import type { ViewType } from '../../types';
+import { SearchBar } from '../search/SearchBar';
 
 export default function CalendarHeader() {
   const { view, setView, currentDate, navigate, toggleSidebar, isSidebarOpen } = useCalendar();
@@ -141,12 +142,7 @@ export default function CalendarHeader() {
 
       {/* Right: Search, Apps, View switcher, Avatar */}
       <div className="flex items-center gap-1 sm:gap-2">
-        <button
-          aria-label="Search"
-          className="p-2.5 rounded-full hover:bg-[rgba(60,64,67,0.08)] text-[#5f6368] transition-colors focus:outline-none"
-        >
-          <Search size={20} />
-        </button>
+        <SearchBar />
 
         {/* Segmented View Switcher */}
         <div className="flex border border-[#dadce0] rounded-lg p-0.5 bg-[#f6f8fc] ml-1 mr-2">

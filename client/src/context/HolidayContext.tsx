@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import type { HolidayEvent } from '../types/holiday';
 import { useHolidays } from '../hooks/useHolidays';
+import { HolidayDetailModal } from '../components/holidays/HolidayDetailModal';
 
 export interface HolidayContextType {
   holidays: HolidayEvent[];
@@ -10,12 +11,15 @@ export interface HolidayContextType {
   setSelectedCountry: (c: string) => void;
   visibleHolidayTypes: string[];
   toggleHolidayType: (type: string) => void;
+  activeHolidayModal: HolidayEvent | null;
+  setActiveHolidayModal: (h: HolidayEvent | null) => void;
 }
 
 const HolidayContext = createContext<HolidayContextType | null>(null);
 
 export const HolidayProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedCountry, setSelectedCountry] = useState<string>('IN');
+  const [activeHolidayModal, setActiveHolidayModal] = useState<HolidayEvent | null>(null);
   const [visibleHolidayTypes, setVisibleHolidayTypes] = useState<string[]>([
     'National holiday',
     'Religious holiday',
@@ -43,9 +47,16 @@ export const HolidayProvider: React.FC<{ children: ReactNode }> = ({ children })
         setSelectedCountry,
         visibleHolidayTypes,
         toggleHolidayType,
+        activeHolidayModal,
+        setActiveHolidayModal,
       }}
     >
       {children}
+      <HolidayDetailModal
+        holiday={activeHolidayModal}
+        isOpen={!!activeHolidayModal}
+        onClose={() => setActiveHolidayModal(null)}
+      />
     </HolidayContext.Provider>
   );
 };

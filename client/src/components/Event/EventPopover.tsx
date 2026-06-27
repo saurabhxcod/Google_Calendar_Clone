@@ -10,7 +10,7 @@ import { useCalendar } from '../../context/CalendarContext';
 
 interface Props {
   event: CalendarEvent | null;
-  anchorRect: DOMRect | null;
+  anchorRect?: DOMRect | null;
   onClose: () => void;
 }
 
@@ -67,7 +67,7 @@ export default function EventPopover({ event, anchorRect, onClose }: Props) {
     return () => document.removeEventListener('keydown', handler);
   }, [onClose]);
 
-  if (!event || !anchorRect) return null;
+  if (!event) return null;
 
   // Position calculation with window bounds protection
   const POPOVER_WIDTH = 340;
@@ -77,17 +77,22 @@ export default function EventPopover({ event, anchorRect, onClose }: Props) {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  let left = anchorRect.right + MARGIN;
-  if (left + POPOVER_WIDTH > viewportWidth) {
-    left = anchorRect.left - POPOVER_WIDTH - MARGIN;
-  }
-  if (left < MARGIN) left = MARGIN;
+  let left = Math.max(MARGIN, (viewportWidth - POPOVER_WIDTH) / 2);
+  let top = Math.max(MARGIN, (viewportHeight - POPOVER_HEIGHT) / 2);
 
-  let top = anchorRect.top;
-  if (top + POPOVER_HEIGHT > viewportHeight) {
-    top = viewportHeight - POPOVER_HEIGHT - MARGIN;
+  if (anchorRect) {
+    left = anchorRect.right + MARGIN;
+    if (left + POPOVER_WIDTH > viewportWidth) {
+      left = anchorRect.left - POPOVER_WIDTH - MARGIN;
+    }
+    if (left < MARGIN) left = MARGIN;
+
+    top = anchorRect.top;
+    if (top + POPOVER_HEIGHT > viewportHeight) {
+      top = viewportHeight - POPOVER_HEIGHT - MARGIN;
+    }
+    if (top < MARGIN) top = MARGIN;
   }
-  if (top < MARGIN) top = MARGIN;
 
   const start = parseUTCtoLocal(event.startTime);
   const end = parseUTCtoLocal(event.endTime);

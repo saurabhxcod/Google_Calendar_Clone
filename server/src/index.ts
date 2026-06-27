@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
 import eventRoutes from './routes/events';
+import searchRoutes from './routes/search.routes';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
+app.use('/api/events/search', searchRoutes);
 
 // Health check
 app.get('/health', (_, res) => res.json({ status: 'ok' }));
