@@ -30,7 +30,6 @@ export default function Sidebar() {
 
   return (
     <aside className="w-[256px] flex-shrink-0 flex flex-col bg-[#f6f8fc] select-none transition-all duration-200 overflow-y-auto overflow-x-hidden pr-2 pb-4 relative">
-      {/* Floating "Create" button */}
       <div className="p-4 pl-4 pt-3 pb-2">
         <motion.button
           whileHover={{ scale: 1.01, boxShadow: '0 4px 8px rgba(60,64,67,0.15)' }}
@@ -39,7 +38,6 @@ export default function Sidebar() {
           aria-label="Create event"
           className="flex items-center gap-3 pl-3.5 pr-6 py-3 rounded-full shadow-md bg-white border border-[#dadce0]/60 hover:bg-[#f8f9fa] transition-all text-[#3c4043] focus:outline-none focus:ring-2 focus:ring-[#1a73e8]"
         >
-          {/* Authentic Google Multi-color Plus */}
           <svg className="w-7 h-7 flex-shrink-0" viewBox="0 0 36 36">
             <path fill="#EA4335" d="M16 6h4v10h-4z" />
             <path fill="#4285F4" d="M16 20h4v10h-4z" />
@@ -53,10 +51,8 @@ export default function Sidebar() {
         </motion.button>
       </div>
 
-      {/* Mini calendar */}
       <MiniCalendar />
 
-      {/* Calendar Visibility Filter List */}
       <CalendarFilterList />
     </aside>
   );

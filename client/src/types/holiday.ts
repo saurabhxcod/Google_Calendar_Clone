@@ -19,10 +19,10 @@ export interface HolidayEvent {
   id: string;
   title: string;
   description: string;
-  startTime: string;       // ISO string at 00:00:00 local
-  endTime: string;         // ISO string at 23:59:59 local
+  startTime: string;
+  endTime: string;
   allDay: true;
-  color: '#0F9D58';        // always holidays green
+  color: '#0F9D58';
   calendarId: 'holidays';
   type: string[];
   isHoliday: true;

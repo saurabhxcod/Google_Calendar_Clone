@@ -29,13 +29,11 @@ export const SearchResultCard: React.FC<SearchResultCardProps> = React.memo(({ r
       onClick={() => onClick(result)}
       className="bg-white rounded-xl border border-[#dadce0] p-4 hover:shadow-md transition-all cursor-pointer flex gap-4 relative select-none font-sans text-gray-800"
     >
-      {/* Left colored bar */}
       <div
         className="w-1.5 self-stretch rounded-full flex-shrink-0"
         style={{ backgroundColor: result.color || '#4285f4' }}
       />
 
-      {/* Content */}
       <div className="flex-1 min-w-0">
         <h3 className="text-base font-semibold text-gray-800 leading-snug truncate">
           <HighlightMatch text={result.title} query={query} />

@@ -26,7 +26,6 @@ const COLOR_NAMES: Record<string, string> = {
   '#7986cb': 'Lavender',
   '#8e24aa': 'Grape',
   '#616161': 'Graphite',
-  // Fallbacks for legacy event colors
   '#4285f4': 'Blueberry',
   '#0f9d58': 'Basil',
   '#f4b400': 'Banana',
@@ -47,7 +46,6 @@ export default function EventPopover({ event, anchorRect, onClose }: Props) {
   const { openEdit, removeEvent } = useCalendar();
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  // Close on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
@@ -58,7 +56,6 @@ export default function EventPopover({ event, anchorRect, onClose }: Props) {
     return () => document.removeEventListener('mousedown', handler);
   }, [onClose]);
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -69,7 +66,6 @@ export default function EventPopover({ event, anchorRect, onClose }: Props) {
 
   if (!event) return null;
 
-  // Position calculation with window bounds protection
   const POPOVER_WIDTH = 340;
   const POPOVER_HEIGHT = 280;
   const MARGIN = 12;
@@ -128,10 +124,8 @@ export default function EventPopover({ event, anchorRect, onClose }: Props) {
         role="dialog"
         aria-label={`Event details for ${event.title}`}
       >
-        {/* Color bar */}
         <div style={{ backgroundColor: event.color || '#039be5' }} className="h-2.5 w-full" />
 
-        {/* Top Action bar */}
         <div className="flex items-center justify-between px-4 pt-3 pb-1">
           <div className="flex items-center gap-2">
             <div
@@ -167,7 +161,6 @@ export default function EventPopover({ event, anchorRect, onClose }: Props) {
           </div>
         </div>
 
-        {/* Card Body */}
         <div className="px-5 pb-5 pt-1 space-y-3.5">
           <h3 className="text-xl font-normal text-[#3c4043] leading-snug font-sans">
             {event.title}

@@ -4,7 +4,7 @@ const API_KEY = import.meta.env.VITE_CALENDARIFIC_API_KEY;
 const BASE_URL = 'https://calendarific.com/api/v2';
 
 export interface FetchHolidaysParams {
-  country?: string; // default 'IN'
+  country?: string;
   year: number;
 }
 

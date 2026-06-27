@@ -87,7 +87,6 @@ export const SearchBar: React.FC = () => {
 
   return (
     <div ref={containerRef} className="relative w-full max-w-lg">
-      {/* Input wrapper */}
       <div className="flex items-center gap-2.5 bg-[#f1f3f4] hover:bg-[#e8eaed] focus-within:bg-white focus-within:shadow-md focus-within:ring-1 focus-within:ring-[#1a73e8] rounded-full px-4 py-2 transition-all duration-200 text-[#3c4043]">
         <Search size={18} className="text-[#5f6368] flex-shrink-0" />
         <input
@@ -121,7 +120,6 @@ export const SearchBar: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 right-0 mt-1 z-50">
           <SearchDropdown

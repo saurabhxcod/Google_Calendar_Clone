@@ -102,12 +102,11 @@ export default function WeekView() {
 
   return (
     <div className="flex flex-col flex-1 overflow-hidden bg-white select-none relative">
-      {/* Day headers */}
       <div
         className="grid border-b border-[#dadce0] bg-white sticky top-0 z-20"
         style={{ gridTemplateColumns: '60px repeat(7, 1fr)' }}
       >
-        <div className="border-r border-[#dadce0]" /> {/* time gutter */}
+        <div className="border-r border-[#dadce0]" />
         {days.map((day, i) => {
           const today = isToday(day);
           return (
@@ -131,7 +130,6 @@ export default function WeekView() {
         })}
       </div>
 
-      {/* All-day row */}
       <div
         className="grid border-b border-[#dadce0] bg-white z-10"
         style={{ gridTemplateColumns: '60px repeat(7, 1fr)' }}
@@ -162,10 +160,8 @@ export default function WeekView() {
         ))}
       </div>
 
-      {/* Time grid (scrollable) */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto relative">
         <div className="grid relative" style={{ gridTemplateColumns: '60px repeat(7, 1fr)' }}>
-          {/* Time labels column */}
           <div className="relative border-r border-[#dadce0]">
             {HOURS.map((h) => (
               <div
@@ -182,7 +178,6 @@ export default function WeekView() {
             ))}
           </div>
 
-          {/* Day columns */}
           {days.map((day, di) => {
             const today = isToday(day);
             return (
@@ -194,7 +189,6 @@ export default function WeekView() {
                 style={{ height: `${HOUR_HEIGHT * 24}px` }}
                 onClick={(e) => handleColumnClick(e, day)}
               >
-                {/* Hour gridlines */}
                 {HOURS.map((h) => (
                   <div
                     key={h}
@@ -203,7 +197,6 @@ export default function WeekView() {
                   />
                 ))}
 
-                {/* Live "Now" indicator */}
                 {today && nowTop !== null && (
                   <div
                     style={{ top: `${nowTop}px` }}
@@ -213,7 +206,6 @@ export default function WeekView() {
                   </div>
                 )}
 
-                {/* Timed Events */}
                 {getEventsForDay(day).map((event) => (
                   <EventBlock
                     key={event._id}
@@ -227,7 +219,6 @@ export default function WeekView() {
         </div>
       </div>
 
-      {/* Interactive Floating Popover */}
       <EventPopover
         event={popoverState.event}
         anchorRect={popoverState.anchorRect}

@@ -87,7 +87,6 @@ export const HolidayChip: React.FC<HolidayChipProps> = React.memo(({ holiday, co
           }`}
           style={{ backgroundColor: 'rgba(15, 157, 88, 0.9)' }}
         >
-          {/* Type color indicator dot */}
           <span
             className="w-2 h-2 rounded-full flex-shrink-0 border border-white/40"
             style={{ backgroundColor: typeColor }}
@@ -95,7 +94,6 @@ export const HolidayChip: React.FC<HolidayChipProps> = React.memo(({ holiday, co
           <span className="font-medium truncate flex-1 leading-tight">{holiday.title}</span>
         </motion.div>
 
-        {/* Hover Tooltip */}
         {showTooltip && (
           <div
             className={`absolute left-0 z-50 bg-white text-[#1f1f1f] shadow-xl border border-[#dadce0] rounded-xl p-3 min-w-48 max-w-64 pointer-events-none font-sans select-none ${
@@ -124,7 +122,6 @@ export const HolidayChip: React.FC<HolidayChipProps> = React.memo(({ holiday, co
         )}
       </div>
 
-      {/* Read-Only Detail Modal */}
       <HolidayDetailModal
         holiday={holiday}
         isOpen={isModalOpen}

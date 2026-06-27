@@ -23,7 +23,6 @@ export const CalendarSection: React.FC<CalendarSectionProps> = ({
 
   return (
     <div className="mt-3 px-3">
-      {/* Section Header Button */}
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-[rgba(60,64,67,0.08)] transition-colors text-left focus:outline-none select-none"
@@ -39,7 +38,6 @@ export const CalendarSection: React.FC<CalendarSectionProps> = ({
         </motion.div>
       </button>
 
-      {/* Collapsible Content */}
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div

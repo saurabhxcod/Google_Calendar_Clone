@@ -3,7 +3,6 @@ import type { CalendarificHoliday, HolidayEvent } from '../types/holiday';
 export function transformHolidays(holidays: CalendarificHoliday[]): HolidayEvent[] {
   if (!Array.isArray(holidays)) return [];
   return holidays.map((holiday, index) => {
-    // Handle ISO string format safety
     const isoDateStr = holiday.date?.iso
       ? holiday.date.iso.split('T')[0]
       : `${holiday.date.datetime.year}-${String(holiday.date.datetime.month).padStart(2, '0')}-${String(holiday.date.datetime.day).padStart(2, '0')}`;

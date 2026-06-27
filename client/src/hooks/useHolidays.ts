@@ -21,7 +21,6 @@ export function useHolidays(year: number, country?: string): UseHolidaysReturn {
   const cacheKey = `${targetCountry}-${year}`;
 
   const loadHolidays = useCallback(async () => {
-    // 1. Check memory cache
     if (cacheRef.current.has(cacheKey)) {
       setHolidays(cacheRef.current.get(cacheKey)!);
       setIsLoading(false);
@@ -29,7 +28,6 @@ export function useHolidays(year: number, country?: string): UseHolidaysReturn {
       return;
     }
 
-    // 2. Check sessionStorage backup
     const sessionKey = `holidays_${targetCountry}_${year}`;
     try {
       const stored = sessionStorage.getItem(sessionKey);
@@ -44,10 +42,8 @@ export function useHolidays(year: number, country?: string): UseHolidaysReturn {
         }
       }
     } catch {
-      // Ignore sessionStorage read errors
     }
 
-    // 3. Fetch from API
     setIsLoading(true);
     setError(null);
 
@@ -59,7 +55,6 @@ export function useHolidays(year: number, country?: string): UseHolidaysReturn {
       try {
         sessionStorage.setItem(sessionKey, JSON.stringify(transformed));
       } catch {
-        // Ignore sessionStorage write errors
       }
 
       setHolidays(transformed);

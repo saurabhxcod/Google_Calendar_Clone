@@ -180,10 +180,8 @@ export default function EventModal() {
         aria-modal="true"
         aria-label={mode === 'create' ? 'Create Event Dialog' : 'Edit Event Dialog'}
       >
-        {/* Color Accent Bar */}
         <div style={{ backgroundColor: form.color || '#039be5' }} className="h-2.5 w-full" />
 
-        {/* Top Header */}
         <div className="flex items-center justify-between px-6 pt-4 pb-2">
           <h2 className="text-xl font-normal text-[#3c4043] font-sans">
             {mode === 'create' ? 'Add Event' : 'Edit Event'}
@@ -209,7 +207,6 @@ export default function EventModal() {
         </div>
 
         <div className="px-6 py-4 space-y-5 max-h-[72vh] overflow-y-auto font-sans">
-          {/* Title Input */}
           <div>
             <input
               type="text"
@@ -221,7 +218,6 @@ export default function EventModal() {
             />
           </div>
 
-          {/* All day toggle */}
           <div className="flex items-center gap-4">
             <Clock size={20} className="text-[#5f6368] flex-shrink-0" />
             <label className="flex items-center gap-2.5 text-sm text-[#3c4043] cursor-pointer font-medium">
@@ -235,7 +231,6 @@ export default function EventModal() {
             </label>
           </div>
 
-          {/* Date/Time Inputs */}
           <div className="flex gap-4 pl-9">
             <div className="flex-1">
               <label className="text-xs text-[#70757a] block mb-1 font-medium">Start Time</label>
@@ -257,7 +252,6 @@ export default function EventModal() {
             </div>
           </div>
 
-          {/* Recurrence */}
           <div className="flex items-center gap-4">
             <Repeat size={20} className="text-[#5f6368] flex-shrink-0" />
             <div className="flex items-center gap-3 flex-1 flex-wrap">
@@ -285,7 +279,6 @@ export default function EventModal() {
             </div>
           </div>
 
-          {/* Location */}
           <div className="flex items-center gap-4">
             <MapPin size={20} className="text-[#5f6368] flex-shrink-0" />
             <input
@@ -297,7 +290,6 @@ export default function EventModal() {
             />
           </div>
 
-          {/* Description */}
           <div className="flex items-start gap-4">
             <AlignLeft size={20} className="text-[#5f6368] flex-shrink-0 mt-1" />
             <textarea
@@ -309,7 +301,6 @@ export default function EventModal() {
             />
           </div>
 
-          {/* Color Picker Swatches */}
           <div className="flex items-center gap-4 pt-1">
             <Tag size={20} className="text-[#5f6368] flex-shrink-0" />
             <div className="flex items-center gap-2 flex-wrap flex-1">
@@ -329,7 +320,6 @@ export default function EventModal() {
             </div>
           </div>
 
-          {/* Edit mode for recurring */}
           {mode === 'edit' && event?.recurrenceGroupId && (
             <div className="bg-[#e8f0fe] rounded-xl p-3.5 border border-[#c2e7ff]">
               <p className="text-sm text-[#001d35] font-medium mb-2">Edit recurring event</p>
@@ -351,7 +341,6 @@ export default function EventModal() {
             </div>
           )}
 
-          {/* Overlap warning */}
           {overlapWarning && (
             <div className="bg-[#fef7e0] border border-[#fce8e6] rounded-xl p-3.5">
               <p className="text-sm text-[#b06000]">{overlapWarning}</p>
@@ -364,11 +353,9 @@ export default function EventModal() {
             </div>
           )}
 
-          {/* Error display */}
           {error && <p className="text-sm text-[#d93025] font-medium">{error}</p>}
         </div>
 
-        {/* Footer */}
         <div className="px-6 py-4 border-t border-[#dadce0] bg-[#f8f9fa] flex items-center justify-between">
           <span className="text-xs text-[#70757a] font-sans">Google Calendar</span>
           <div className="flex items-center gap-3">
@@ -389,7 +376,6 @@ export default function EventModal() {
           </div>
         </div>
 
-        {/* Delete confirm overlay */}
         <AnimatePresence>
           {showDeleteConfirm && (
             <motion.div

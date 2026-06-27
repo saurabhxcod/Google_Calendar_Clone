@@ -55,7 +55,6 @@ export function useCalendarVisibility(): UseCalendarVisibilityReturn {
         Object.keys(prev).forEach((key) => {
           next[key] = key === id;
         });
-        // Ensure requested calendar is true even if not in keys
         next[id] = true;
         const validated = ensureAtLeastOneVisible(next);
         saveVisibilityToStorage(validated);

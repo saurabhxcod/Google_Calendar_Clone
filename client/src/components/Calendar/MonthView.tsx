@@ -64,7 +64,6 @@ export default function MonthView() {
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-white select-none relative">
-      {/* Day labels header */}
       <div className="grid grid-cols-7 border-b border-[#dadce0] bg-white">
         {DAY_LABELS.map((d) => (
           <div key={d} className="py-2 text-center text-[11px] font-medium text-[#70757a] tracking-wider">
@@ -73,7 +72,6 @@ export default function MonthView() {
         ))}
       </div>
 
-      {/* Weeks grid */}
       <div className="flex-1 grid" style={{ gridTemplateRows: `repeat(${weeks.length}, 1fr)` }}>
         {weeks.map((week, wi) => (
           <div key={wi} className="grid grid-cols-7 border-b border-[#dadce0] last:border-b-0">
@@ -94,7 +92,6 @@ export default function MonthView() {
                     ${!inMonth ? 'bg-[#f8f9fa]/60' : 'bg-white'}
                   `}
                 >
-                  {/* Date number */}
                   <div className="flex justify-center mb-1.5 pt-0.5">
                     <span className={`
                       text-[12px] w-6 h-6 flex items-center justify-center rounded-full font-sans
@@ -105,7 +102,6 @@ export default function MonthView() {
                     </span>
                   </div>
 
-                  {/* Events stack */}
                   <div className="flex-1 overflow-hidden">
                     {visible.map((event) => (
                       <EventChip
@@ -123,7 +119,6 @@ export default function MonthView() {
                     ))}
                   </div>
 
-                  {/* Overflow button */}
                   {overflow > 0 && (
                     <button
                       onClick={(e) => {
@@ -142,7 +137,6 @@ export default function MonthView() {
         ))}
       </div>
 
-      {/* Interactive Floating Popover */}
       <EventPopover
         event={popoverState.event}
         anchorRect={popoverState.anchorRect}

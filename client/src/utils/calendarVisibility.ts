@@ -42,7 +42,6 @@ export function saveVisibilityToStorage(map: VisibilityMap): void {
   try {
     localStorage.setItem('calendar_visibility', JSON.stringify(map));
   } catch {
-    // Silently handle storage write failures
   }
 }
 

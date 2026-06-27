@@ -79,7 +79,6 @@ export default function DayView() {
         </div>
       </div>
 
-      {/* All-day row if any */}
       {allDayEvents.length > 0 && (
         <div className="flex border-b border-[#dadce0] bg-white z-10">
           <div className="w-[60px] text-[11px] font-medium text-right pr-3 py-1.5 text-[#70757a] border-r border-[#dadce0]">
@@ -99,7 +98,6 @@ export default function DayView() {
           </div>
         </div>
       )}
-      {/* Holiday banner */}
       {isVisible('holidays') && (() => {
         const dayHolidays = filterHolidaysByDateRange(
           holidays,
@@ -116,10 +114,8 @@ export default function DayView() {
         );
       })()}
 
-      {/* Scrollable time grid */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto relative">
         <div className="flex relative">
-          {/* Time gutter */}
           <div className="w-[60px] flex-shrink-0 border-r border-[#dadce0]">
             {HOURS.map((h) => (
               <div
@@ -136,7 +132,6 @@ export default function DayView() {
             ))}
           </div>
 
-          {/* Event column */}
           <div
             className={`flex-1 relative cursor-pointer ${today ? 'bg-[#1a73e8]/[0.02]' : ''}`}
             style={{ height: `${HOUR_HEIGHT * 24}px` }}
@@ -150,7 +145,6 @@ export default function DayView() {
               />
             ))}
 
-            {/* Live "Now" indicator */}
             {today && nowTop !== null && (
               <div
                 style={{ top: `${nowTop}px` }}

@@ -52,10 +52,8 @@ export const HolidayDetailModal: React.FC<HolidayDetailModalProps> = ({
           className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full max-w-[480px] relative font-sans text-[#1f1f1f] select-none"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Top Green Color Bar */}
           <div className="h-3 bg-[#0F9D58] w-full" />
 
-          {/* Close Button */}
           <button
             ref={closeBtnRef}
             onClick={onClose}
@@ -65,9 +63,7 @@ export const HolidayDetailModal: React.FC<HolidayDetailModalProps> = ({
             <X size={20} />
           </button>
 
-          {/* Body Content */}
           <div className="p-6 pt-5 space-y-5">
-            {/* Large Title */}
             <h2
               id="holiday-modal-title"
               className="text-2xl font-semibold text-[#1f1f1f] tracking-tight pr-8 font-sans"
@@ -75,15 +71,12 @@ export const HolidayDetailModal: React.FC<HolidayDetailModalProps> = ({
               {holiday.title}
             </h2>
 
-            {/* Meta Items List */}
             <div className="space-y-3 text-sm text-[#3c4043]">
-              {/* Calendar Source */}
               <div className="flex items-center gap-3.5">
                 <Calendar size={18} className="text-[#5f6368] flex-shrink-0" />
                 <span className="font-medium text-[#3c4043]">Holidays in India</span>
               </div>
 
-              {/* Date & All Day */}
               <div className="flex items-center gap-3.5">
                 <Clock size={18} className="text-[#5f6368] flex-shrink-0" />
                 <span>
@@ -91,7 +84,6 @@ export const HolidayDetailModal: React.FC<HolidayDetailModalProps> = ({
                 </span>
               </div>
 
-              {/* Type Badges */}
               <div className="flex items-start gap-3.5">
                 <Tag size={18} className="text-[#5f6368] flex-shrink-0 mt-0.5" />
                 <div className="flex flex-wrap gap-1.5">
@@ -107,13 +99,11 @@ export const HolidayDetailModal: React.FC<HolidayDetailModalProps> = ({
                 </div>
               </div>
 
-              {/* Location */}
               <div className="flex items-center gap-3.5">
                 <MapPin size={18} className="text-[#5f6368] flex-shrink-0" />
                 <span>India</span>
               </div>
 
-              {/* Description */}
               {holiday.description && (
                 <div className="flex items-start gap-3.5 pt-1">
                   <AlignLeft size={18} className="text-[#5f6368] flex-shrink-0 mt-0.5" />
@@ -125,7 +115,6 @@ export const HolidayDetailModal: React.FC<HolidayDetailModalProps> = ({
             </div>
           </div>
 
-          {/* Footer */}
           <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex justify-end">
             <button
               onClick={onClose}

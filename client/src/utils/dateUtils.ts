@@ -35,12 +35,12 @@ export const getHours = (): string[] =>
 
 export const getEventTop = (startTime: Date): number => {
     const minutes = startTime.getHours() * 60 + startTime.getMinutes();
-    return (minutes / 60) * 64; // 64px per hour
+    return (minutes / 60) * 64;
 };
 
 export const getEventHeight = (startTime: Date, endTime: Date): number => {
     const mins = differenceInMinutes(endTime, startTime);
-    return Math.max((mins / 60) * 64, 22); // min height 22px
+    return Math.max((mins / 60) * 64, 22);
 };
 
 export const snapToQuarterHour = (date: Date): Date => {

@@ -19,7 +19,6 @@ export default function MiniCalendar() {
 
   return (
     <div className="px-4 py-3 select-none">
-      {/* Month nav */}
       <div className="flex items-center justify-between mb-3 pl-1 pr-1">
         <span className="text-sm font-medium text-[#3c4043] tracking-normal font-sans">
           {format(miniDate, 'MMMM yyyy')}

@@ -41,7 +41,6 @@ export default function EventCard({ event, onClick, compact = false }: Props) {
         ${compact ? 'text-[11px]' : 'text-xs'}
       `}
     >
-      {/* All-day events show just title */}
       {event.allDay ? (
         <span className="font-medium">{event.title}</span>
       ) : (

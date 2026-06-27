@@ -22,7 +22,6 @@ export default function CalendarHeader() {
     return format(currentDate, 'EEEE, MMMM d, yyyy');
   };
 
-  // Close mini cal dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -35,7 +34,6 @@ export default function CalendarHeader() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showMiniCalDropdown]);
 
-  // Close profile popup on click outside
   useEffect(() => {
     const handleClickOutsideProfile = (e: MouseEvent) => {
       if (profileMenuRef.current && !profileMenuRef.current.contains(e.target as Node)) {
@@ -52,7 +50,6 @@ export default function CalendarHeader() {
 
   return (
     <header className="flex items-center justify-between px-3 h-16 border-b border-[#e8eaed] bg-white sticky top-0 z-30 select-none">
-      {/* Left: Hamburger menu icon, Google Calendar wordmark + icon */}
       <div className="flex items-center gap-2 min-w-[230px]">
         <button
           onClick={toggleSidebar}
@@ -62,7 +59,6 @@ export default function CalendarHeader() {
           <Menu size={20} />
         </button>
         <div className="flex items-center gap-2 cursor-pointer pl-1">
-          {/* Dynamic Google Calendar Logo Badge */}
           <div className="w-10 h-10 rounded-xl bg-gradient-to-b from-[#4285f4] to-[#1a73e8] shadow-xs flex flex-col items-center justify-between overflow-hidden p-[2px] relative flex-shrink-0 select-none">
             <div className="w-full h-[11px] bg-[#aecbfa]/40 rounded-t-lg" />
             <div className="flex-1 flex items-center justify-center -mt-1">
@@ -77,7 +73,6 @@ export default function CalendarHeader() {
         </div>
       </div>
 
-      {/* Center-left: "Today" button + chevron arrows + month/year title dropdown */}
       <div className="flex items-center gap-1 sm:gap-2 flex-1 pl-2 sm:pl-6">
         <motion.button
           whileTap={{ scale: 0.96 }}
@@ -104,7 +99,6 @@ export default function CalendarHeader() {
           </button>
         </div>
 
-        {/* Dynamic Title / Dropdown container */}
         <div className="relative ml-2" ref={dropdownRef}>
           {!isSidebarOpen ? (
             <button
@@ -123,7 +117,6 @@ export default function CalendarHeader() {
             </h1>
           )}
 
-          {/* Floating MiniCalendar popover */}
           <AnimatePresence>
             {!isSidebarOpen && showMiniCalDropdown && (
               <motion.div
@@ -140,11 +133,9 @@ export default function CalendarHeader() {
         </div>
       </div>
 
-      {/* Right: Search, Apps, View switcher, Avatar */}
       <div className="flex items-center gap-1 sm:gap-2">
         <SearchBar />
 
-        {/* Segmented View Switcher */}
         <div className="flex border border-[#dadce0] rounded-lg p-0.5 bg-[#f6f8fc] ml-1 mr-2">
           {(['day', 'week', 'month'] as ViewType[]).map((v) => (
             <button
@@ -162,7 +153,6 @@ export default function CalendarHeader() {
           ))}
         </div>
 
-        {/* Profile Avatar & Interactive Popover */}
         <div className="relative group ml-1" ref={profileMenuRef}>
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
@@ -172,7 +162,6 @@ export default function CalendarHeader() {
             {user?.name?.charAt(0).toUpperCase() || 'U'}
           </button>
 
-          {/* Hover Tooltip (Shown when menu is not open) */}
           {!showProfileMenu && (
             <div className="absolute top-full right-0 mt-1.5 hidden group-hover:flex flex-col bg-[#3c4043] text-white px-3 py-2 rounded-lg shadow-xl text-xs z-40 whitespace-nowrap pointer-events-none font-sans leading-snug min-w-[190px] border border-white/10">
               <span className="text-[#bdc1c6] text-[11px] font-medium">Google Account</span>
@@ -181,7 +170,6 @@ export default function CalendarHeader() {
             </div>
           )}
 
-          {/* Google Account Click Popup Card */}
           <AnimatePresence>
             {showProfileMenu && (
               <motion.div
@@ -191,7 +179,6 @@ export default function CalendarHeader() {
                 transition={{ duration: 0.15, ease: 'easeOut' }}
                 className="absolute top-full right-0 mt-2 bg-[#e9eef6] text-[#1f1f1f] rounded-[28px] shadow-2xl border border-[#dadce0]/80 p-6 z-50 w-[360px] font-sans flex flex-col items-center select-none"
               >
-                {/* Top Bar with Email & Close button */}
                 <div className="w-full flex items-center justify-between relative mb-2">
                   <span className="text-xs font-medium text-[#444746] w-full text-center truncate pr-6 pl-6">
                     {user?.email || 'user@gmail.com'}
@@ -205,7 +192,6 @@ export default function CalendarHeader() {
                   </button>
                 </div>
 
-                {/* Avatar with Camera Overlay */}
                 <div className="relative mt-2 mb-3">
                   <div className="w-20 h-20 rounded-full bg-[#0288d1] text-white text-3xl font-normal flex items-center justify-center shadow-xs">
                     {user?.name?.charAt(0).toUpperCase() || 'U'}
@@ -218,7 +204,6 @@ export default function CalendarHeader() {
                   </button>
                 </div>
 
-                {/* Greeting & Manage Account Pill */}
                 <h2 className="text-xl font-normal text-[#1f1f1f] mb-3 font-sans">
                   Hi, {firstName}!
                 </h2>
@@ -226,7 +211,6 @@ export default function CalendarHeader() {
                   Manage your Google Account
                 </button>
 
-                {/* Action Pill Cards (Add Account & Sign Out) */}
                 <div className="grid grid-cols-2 gap-3 w-full mb-5">
                   <div className="bg-white rounded-2xl p-3 flex items-center gap-3 shadow-2xs cursor-pointer hover:bg-gray-50 transition-colors">
                     <div className="w-9 h-9 rounded-full bg-[#f0f4f9] flex items-center justify-center text-[#0b57d0] flex-shrink-0">
@@ -248,7 +232,6 @@ export default function CalendarHeader() {
                   </div>
                 </div>
 
-                {/* Footer text */}
                 <div className="flex items-center justify-center gap-2 text-[11px] text-[#444746] font-medium">
                   <span className="cursor-pointer hover:underline">Privacy Policy</span>
                   <span>•</span>

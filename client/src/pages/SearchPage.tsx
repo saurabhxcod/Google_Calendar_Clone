@@ -111,7 +111,6 @@ export const SearchPage: React.FC = () => {
     <div className="flex flex-col h-screen bg-[#f6f8fc] overflow-hidden select-none font-sans">
       <CalendarHeader />
       <div className="flex-1 overflow-y-auto bg-white rounded-tl-2xl border-l border-t border-[#dadce0] shadow-sm p-6 max-w-5xl mx-auto w-full my-0">
-        {/* Header bar */}
         <div className="flex items-center gap-3 pb-4 border-b border-gray-200 mb-6">
           <button
             onClick={() => navigate(-1)}
@@ -130,7 +129,6 @@ export const SearchPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Content states */}
         {isLoading ? (
           <div className="py-20 flex flex-col items-center justify-center gap-3">
             <div className="w-8 h-8 border-3 border-[#1a73e8] border-t-transparent rounded-full animate-spin" />

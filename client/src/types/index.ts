@@ -12,7 +12,7 @@ export interface CalendarEvent {
     calendarId?: string;
     title: string;
     description?: string;
-    startTime: string; // ISO string (UTC from server)
+    startTime: string;
     endTime: string;
     allDay: boolean;
     color: EventColor;

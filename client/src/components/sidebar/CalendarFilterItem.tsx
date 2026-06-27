@@ -71,7 +71,6 @@ export const CalendarFilterItem: React.FC<CalendarFilterItemProps> = React.memo(
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Checkbox and Calendar Name */}
       <div
         className="flex items-center gap-3 min-w-0 flex-1 py-1"
         onClick={handleToggle}
@@ -106,7 +105,6 @@ export const CalendarFilterItem: React.FC<CalendarFilterItemProps> = React.memo(
         </span>
       </div>
 
-      {/* Three-dot options button */}
       <AnimatePresence>
         {(isHovered || isMenuOpen) && (
           <motion.button
@@ -123,7 +121,6 @@ export const CalendarFilterItem: React.FC<CalendarFilterItemProps> = React.memo(
         )}
       </AnimatePresence>
 
-      {/* Dropdown Menu */}
       <AnimatePresence>
         {isMenuOpen && menuPos && (
           <motion.div
@@ -155,7 +152,6 @@ export const CalendarFilterItem: React.FC<CalendarFilterItemProps> = React.memo(
 
             <div className="border-b border-[#dadce0]/80 my-1.5" />
 
-            {/* Color Palette Swatches (6 cols x 4 rows) */}
             <div className="grid grid-cols-6 gap-2 mb-2 px-4 pt-1">
               {PALETTE_COLORS.map((hex) => {
                 const isSelected = calendar.color.toLowerCase() === hex.toLowerCase();
@@ -176,7 +172,6 @@ export const CalendarFilterItem: React.FC<CalendarFilterItemProps> = React.memo(
               })}
             </div>
 
-            {/* Plus button at bottom left of palette */}
             <div className="px-4 pt-0.5 pb-1">
               <button
                 onClick={() => setIsMenuOpen(false)}
