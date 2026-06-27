@@ -13,6 +13,8 @@ import LoginModal from './components/Auth/LoginModal';
 import RegisterModal from './components/Auth/RegisterModal';
 
 import { CalendarVisibilityProvider } from './context/CalendarVisibilityContext';
+import { HolidayProvider } from './context/HolidayContext';
+import { HolidayLoadingBar } from './components/holidays/HolidayLoadingBar';
 
 function CalendarApp() {
   const { view } = useCalendar();
@@ -22,7 +24,8 @@ function CalendarApp() {
       <CalendarHeader />
       <div className="flex flex-1 overflow-hidden relative">
         <Sidebar />
-        <main className="flex-1 flex flex-col overflow-hidden bg-white rounded-tl-2xl border-l border-t border-[#dadce0] shadow-sm ml-0 my-0 mr-0">
+        <main className="flex-1 flex flex-col overflow-hidden bg-white rounded-tl-2xl border-l border-t border-[#dadce0] shadow-sm ml-0 my-0 mr-0 relative">
+          <HolidayLoadingBar />
           <AnimatePresence mode="wait">
             <motion.div
               key={view}
@@ -63,11 +66,13 @@ function AuthGate() {
   }
 
   return (
-    <CalendarVisibilityProvider>
-      <CalendarProvider>
-        <CalendarApp />
-      </CalendarProvider>
-    </CalendarVisibilityProvider>
+    <HolidayProvider>
+      <CalendarVisibilityProvider>
+        <CalendarProvider>
+          <CalendarApp />
+        </CalendarProvider>
+      </CalendarVisibilityProvider>
+    </HolidayProvider>
   );
 }
 

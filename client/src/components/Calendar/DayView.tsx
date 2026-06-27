@@ -1,17 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { MapPin } from 'lucide-react';
 import {
-  format, isToday, isSameDay, parseUTCtoLocal,
+  format, isToday, isSameDay, parseUTCtoLocal, startOfDay, endOfDay,
 } from '../../utils/dateUtils';
 import { useCalendar } from '../../context/CalendarContext';
 import EventPopover from '../Event/EventPopover';
 import type { CalendarEvent } from '../../types';
+import { useHolidayContext } from '../../context/HolidayContext';
+import { filterHolidaysByDateRange } from '../../utils/holidayUtils';
+import { HolidayChip } from '../holidays/HolidayChip';
+import { useCalendarVisibilityContext } from '../../context/CalendarVisibilityContext';
 
 const HOUR_HEIGHT = 48;
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
 
 export default function DayView() {
   const { currentDate, visibleEvents: events, openCreate } = useCalendar();
+  const { holidays } = useHolidayContext();
+  const { isVisible } = useCalendarVisibilityContext();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const [popoverState, setPopoverState] = useState<{
@@ -93,6 +99,22 @@ export default function DayView() {
           </div>
         </div>
       )}
+      {/* Holiday banner */}
+      {isVisible('holidays') && (() => {
+        const dayHolidays = filterHolidaysByDateRange(
+          holidays,
+          startOfDay(currentDate),
+          endOfDay(currentDate)
+        );
+        if (dayHolidays.length === 0) return null;
+        return (
+          <div className="px-4 py-1 border-b border-[#dadce0] bg-green-50">
+            {dayHolidays.map(h => (
+              <HolidayChip key={h.id} holiday={h} compact={false} />
+            ))}
+          </div>
+        );
+      })()}
 
       {/* Scrollable time grid */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto relative">
