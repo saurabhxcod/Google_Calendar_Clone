@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500&family=Roboto:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Google Sans', 'Google Sans Text', Roboto, Arial, sans-serif;
+
+  --color-surface: #ffffff;
+  --color-surface-variant: #f6f8fc;
+  --color-outline: #dadce0;
+  --color-outline-faint: #e8eaed;
+  --color-on-surface: #3c4043;
+  --color-on-surface-variant: #5f6368;
+  --color-primary: #1a73e8;
+  --color-primary-hover: #1765cc;
+  --color-today-indicator: #1a73e8;
+  --color-state-layer-hover: rgba(60, 64, 67, 0.08);
+  --color-state-layer-hover-primary: rgba(26, 115, 232, 0.08);
+
+  --color-event-tomato: #d50000;
+  --color-event-flamingo: #e67c73;
+  --color-event-tangerine: #f4511e;
+  --color-event-banana: #f6bf26;
+  --color-event-sage: #33b679;
+  --color-event-basil: #0b8043;
+  --color-event-peacock: #039be5;
+  --color-event-blueberry: #3f51b5;
+  --color-event-lavender: #7986cb;
+  --color-event-grape: #8e24aa;
+  --color-event-graphite: #616161;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Google Sans', 'Google Sans Text', Roboto, Arial, sans-serif;
+    background-color: #ffffff;
+    color: #3c4043;
+}
+
+/* Custom scrollbar matching Google Calendar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dadce0;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bdc1c6;
+}
