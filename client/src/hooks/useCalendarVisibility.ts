@@ -36,12 +36,6 @@ export function useCalendarVisibility(): UseCalendarVisibilityReturn {
   const [myCalendarsOpen, setMyCalendarsOpen] = useState<boolean>(true);
   const [otherCalendarsOpen, setOtherCalendarsOpen] = useState<boolean>(true);
 
-  const updateVisibilityMap = useCallback((newMap: VisibilityMap) => {
-    const validated = ensureAtLeastOneVisible(newMap);
-    setVisibleCalendars(validated);
-    saveVisibilityToStorage(validated);
-  }, []);
-
   const toggleCalendar = useCallback(
     (id: string) => {
       setVisibleCalendars((prev) => {

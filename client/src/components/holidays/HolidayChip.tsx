@@ -14,7 +14,7 @@ export const HolidayChip: React.FC<HolidayChipProps> = React.memo(({ holiday, co
   const [showTooltip, setShowTooltip] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tooltipPos, setTooltipPos] = useState<'above' | 'below'>('above');
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const chipRef = useRef<HTMLDivElement>(null);
 
   const handleMouseEnter = useCallback(() => {

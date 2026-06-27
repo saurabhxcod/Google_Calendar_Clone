@@ -3,12 +3,19 @@
 .env.*
 !.env.example
 
-# Node modules & build outputs
+# Dependencies & Build outputs
 node_modules/
 dist/
 build/
 
-# OS / Editor files
+# Logs & Temporary files
+*.log
+*.tmp
+*.bak
+*.old
+
+# OS & Editor files
 .DS_Store
+Thumbs.db
 .vscode/
 .idea/

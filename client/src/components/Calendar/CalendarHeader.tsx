@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ChevronDown, Search, Menu, X, Camera, Plus, LogOut } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown, Menu, X, Camera, Plus, LogOut } from 'lucide-react';
 import { format } from '../../utils/dateUtils';
 import { useCalendar } from '../../context/CalendarContext';
 import { useAuth } from '../../context/AuthContext';

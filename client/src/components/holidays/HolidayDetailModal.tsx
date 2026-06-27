@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, Tag, AlignLeft, MapPin, X } from 'lucide-react';
 import type { HolidayEvent } from '../../types/holiday';
 import { format, parseUTCtoLocal } from '../../utils/dateUtils';
-import { getHolidayTypeColor, getHolidayTypeLabel } from '../../utils/holidayUtils';
+import { getHolidayTypeColor } from '../../utils/holidayUtils';
 
 interface HolidayDetailModalProps {
   holiday: HolidayEvent | null;

@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Edit2, Trash2, Clock, MapPin,
-  AlignLeft, Repeat, Calendar, Users
+  AlignLeft, Repeat, Calendar
 } from 'lucide-react';
 import { format, parseUTCtoLocal } from '../../utils/dateUtils';
 import type { CalendarEvent } from '../../types';

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 import type { HolidayEvent } from '../types/holiday';
 import { useHolidays } from '../hooks/useHolidays';
 import { HolidayDetailModal } from '../components/holidays/HolidayDetailModal';

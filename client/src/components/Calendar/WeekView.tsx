@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import {
   format, getWeekDays, isToday, isSameDay, parseUTCtoLocal,
-  getEventTop, getEventHeight, startOfDay, endOfDay,
+  startOfDay, endOfDay,
 } from '../../utils/dateUtils';
 import { useCalendar } from '../../context/CalendarContext';
 import EventPopover from '../Event/EventPopover';

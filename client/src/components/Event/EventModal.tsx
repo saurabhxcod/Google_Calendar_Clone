@@ -9,7 +9,7 @@ const COLORS: EventColor[] = [
   '#d50000', '#e67c73', '#f4511e', '#f6bf26',
   '#33b679', '#0b8043', '#039be5', '#3f51b5',
   '#7986cb', '#8e24aa', '#616161',
-] as EventColor[];
+] as unknown as EventColor[];
 
 const COLOR_NAMES: Record<string, string> = {
   '#d50000': 'Tomato',
@@ -61,7 +61,7 @@ export default function EventModal() {
     startTime: toDefaultStart(defaultDate, defaultHour),
     endTime: toDefaultEnd(defaultDate, defaultHour),
     allDay: false,
-    color: '#039be5',
+    color: '#039be5' as EventColor,
     location: '',
     recurrence: 'none',
     recurrenceEnd: '',
@@ -95,7 +95,7 @@ export default function EventModal() {
         startTime: toDefaultStart(defaultDate, defaultHour),
         endTime: toDefaultEnd(defaultDate, defaultHour),
         allDay: false,
-        color: '#039be5',
+        color: '#039be5' as EventColor,
         location: '',
         recurrence: 'none',
         recurrenceEnd: '',
@@ -370,7 +370,7 @@ export default function EventModal() {
 
         {/* Footer */}
         <div className="px-6 py-4 border-t border-[#dadce0] bg-[#f8f9fa] flex items-center justify-between">
-          <span className="text-xs text-[#70757a] font-sans">Google Calendar Clone</span>
+          <span className="text-xs text-[#70757a] font-sans">Google Calendar</span>
           <div className="flex items-center gap-3">
             <button
               onClick={closeModal}
