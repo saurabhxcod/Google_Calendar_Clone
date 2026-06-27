@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Routes, Route } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { CalendarProvider } from './context/CalendarContext';
 import { useCalendar } from './context/CalendarContext';
@@ -11,36 +12,48 @@ import DayView from './components/Calendar/DayView';
 import EventModal from './components/Event/EventModal';
 import LoginModal from './components/Auth/LoginModal';
 import RegisterModal from './components/Auth/RegisterModal';
+import SearchPage from './pages/SearchPage';
 
 import { CalendarVisibilityProvider } from './context/CalendarVisibilityContext';
+
+import { HolidayLoadingBar } from './components/holidays/HolidayLoadingBar';
 
 function CalendarApp() {
   const { view } = useCalendar();
 
   return (
-    <div className="flex flex-col h-screen bg-[#f6f8fc] overflow-hidden select-none">
-      <CalendarHeader />
-      <div className="flex flex-1 overflow-hidden relative">
-        <Sidebar />
-        <main className="flex-1 flex flex-col overflow-hidden bg-white rounded-tl-2xl border-l border-t border-[#dadce0] shadow-sm ml-0 my-0 mr-0">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={view}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
-              className="flex-1 flex flex-col overflow-hidden"
-            >
-              {view === 'month' && <MonthView />}
-              {view === 'week' && <WeekView />}
-              {view === 'day' && <DayView />}
-            </motion.div>
-          </AnimatePresence>
-        </main>
-      </div>
-      <EventModal />
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="flex flex-col h-screen bg-[#f6f8fc] overflow-hidden select-none">
+            <CalendarHeader />
+            <div className="flex flex-1 overflow-hidden relative">
+              <Sidebar />
+              <main className="flex-1 flex flex-col overflow-hidden bg-white rounded-tl-2xl border-l border-t border-[#dadce0] shadow-sm ml-0 my-0 mr-0 relative">
+                <HolidayLoadingBar />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={view}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex-1 flex flex-col overflow-hidden"
+                  >
+                    {view === 'month' && <MonthView />}
+                    {view === 'week' && <WeekView />}
+                    {view === 'day' && <DayView />}
+                  </motion.div>
+                </AnimatePresence>
+              </main>
+            </div>
+            <EventModal />
+          </div>
+        }
+      />
+      <Route path="/search" element={<SearchPage />} />
+    </Routes>
   );
 }
 
