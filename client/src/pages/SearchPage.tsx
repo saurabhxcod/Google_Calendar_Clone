@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search as SearchIcon } from 'lucide-react';
 import { useCalendar } from '../context/CalendarContext';
+import { useHolidayContext } from '../context/HolidayContext';
 import { searchEvents } from '../services/searchService';
 import type { SearchResult } from '../types/search';
 import { SearchResultCard } from '../components/search/SearchResultCard';
@@ -11,7 +12,8 @@ export const SearchPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const q = searchParams.get('q') ?? '';
   const navigate = useNavigate();
-  const { setCurrentDate, setView } = useCalendar();
+  const { setCurrentDate, setView, events, setActivePopoverEvent } = useCalendar();
+  const { holidays, setActiveHolidayModal } = useHolidayContext();
 
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,20 +29,82 @@ export const SearchPage: React.FC = () => {
     setError(null);
     searchEvents(q)
       .then((data) => {
-        setResults(data);
+        const term = q.trim().toLowerCase();
+        const matchingHolidays: SearchResult[] = holidays
+          .filter(
+            (h) =>
+              h.title.toLowerCase().includes(term) ||
+              (h.description && h.description.toLowerCase().includes(term))
+          )
+          .map((h) => ({
+            id: h.id,
+            title: h.title,
+            description: h.description,
+            startTime: h.startTime,
+            endTime: h.endTime,
+            location: 'India',
+            color: h.color || '#0F9D58',
+            allDay: true,
+            calendarId: 'holidays',
+            isHoliday: true,
+            type: h.type,
+          }));
+
+        setResults([...data, ...matchingHolidays]);
         setIsLoading(false);
       })
       .catch(() => {
         setError('Search failed');
         setIsLoading(false);
       });
-  }, [q]);
+  }, [q, holidays]);
 
   const handleCardClick = (result: SearchResult) => {
     const date = new Date(result.startTime);
     setCurrentDate(date);
     setView('day');
     navigate('/');
+
+    if (result.isHoliday) {
+      const holidayEvent = holidays.find((h) => h.id === result.id) || {
+        id: result.id,
+        title: result.title,
+        description: result.description,
+        startTime: result.startTime,
+        endTime: result.endTime,
+        allDay: true,
+        color: '#0F9D58',
+        calendarId: 'holidays',
+        type: result.type || ['Holiday'],
+        isHoliday: true,
+      };
+      setTimeout(() => {
+        setActiveHolidayModal(holidayEvent as any);
+      }, 100);
+      return;
+    }
+
+    const existing = events.find((e) => e._id === result.id);
+    const popoverEvent = existing || {
+      _id: result.id,
+      userId: '',
+      calendarId: result.calendarId || 'primary',
+      title: result.title,
+      description: result.description,
+      startTime: result.startTime,
+      endTime: result.endTime,
+      allDay: result.allDay,
+      color: (result.color as any) || '#039be5',
+      location: result.location,
+      recurrence: 'none',
+      isException: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    setTimeout(() => {
+      setActivePopoverEvent(popoverEvent as any);
+    }, 100);
   };
 
   return (

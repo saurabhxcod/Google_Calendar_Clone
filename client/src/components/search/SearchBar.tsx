@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCalendar } from '../../context/CalendarContext';
+import { useHolidayContext } from '../../context/HolidayContext';
 import { useEventSearch } from '../../hooks/useEventSearch';
 import { SearchDropdown } from './SearchDropdown';
 import type { SearchResult } from '../../types/search';
@@ -23,7 +24,8 @@ export const SearchBar: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { setCurrentDate, setView } = useCalendar();
+  const { setCurrentDate, setView, events, setActivePopoverEvent } = useCalendar();
+  const { holidays, setActiveHolidayModal } = useHolidayContext();
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -40,6 +42,47 @@ export const SearchBar: React.FC = () => {
     setCurrentDate(date);
     setView('day');
     clearSearch();
+
+    if (result.isHoliday) {
+      const holidayEvent = holidays.find((h) => h.id === result.id) || {
+        id: result.id,
+        title: result.title,
+        description: result.description,
+        startTime: result.startTime,
+        endTime: result.endTime,
+        allDay: true,
+        color: '#0F9D58',
+        calendarId: 'holidays',
+        type: result.type || ['Holiday'],
+        isHoliday: true,
+      };
+      setTimeout(() => {
+        setActiveHolidayModal(holidayEvent as any);
+      }, 50);
+      return;
+    }
+
+    const existing = events.find((e) => e._id === result.id);
+    const popoverEvent = existing || {
+      _id: result.id,
+      userId: '',
+      calendarId: result.calendarId || 'primary',
+      title: result.title,
+      description: result.description,
+      startTime: result.startTime,
+      endTime: result.endTime,
+      allDay: result.allDay,
+      color: (result.color as any) || '#039be5',
+      location: result.location,
+      recurrence: 'none',
+      isException: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    setTimeout(() => {
+      setActivePopoverEvent(popoverEvent as any);
+    }, 50);
   };
 
   return (

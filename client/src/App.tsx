@@ -18,8 +18,10 @@ import { CalendarVisibilityProvider } from './context/CalendarVisibilityContext'
 import { HolidayProvider } from './context/HolidayContext';
 import { HolidayLoadingBar } from './components/holidays/HolidayLoadingBar';
 
+import EventPopover from './components/Event/EventPopover';
+
 function CalendarApp() {
-  const { view } = useCalendar();
+  const { view, activePopoverEvent, setActivePopoverEvent } = useCalendar();
 
   return (
     <Routes>
@@ -49,6 +51,10 @@ function CalendarApp() {
               </main>
             </div>
             <EventModal />
+            <EventPopover
+              event={activePopoverEvent}
+              onClose={() => setActivePopoverEvent(null)}
+            />
           </div>
         }
       />

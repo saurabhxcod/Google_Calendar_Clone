@@ -28,6 +28,8 @@ interface CalendarContextType {
   saveEvent: (data: Partial<EventFormData>, editMode?: string) => Promise<void>;
   removeEvent: (id: string, deleteMode?: string) => Promise<void>;
   refreshEvents: () => void;
+  activePopoverEvent: CalendarEvent | null;
+  setActivePopoverEvent: (event: CalendarEvent | null) => void;
 }
 
 interface ModalState {
@@ -45,6 +47,7 @@ export function CalendarProvider({ children }: { children: ReactNode }) {
   const [view, setView] = useState<ViewType>('month');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [activePopoverEvent, setActivePopoverEvent] = useState<CalendarEvent | null>(null);
 
   const [visibilityTick, setVisibilityTick] = useState(0);
 
@@ -153,6 +156,7 @@ export function CalendarProvider({ children }: { children: ReactNode }) {
       events, visibleEvents, isLoading, isSidebarOpen, toggleSidebar, navigate,
       openCreate, openEdit, closeModal, modalState,
       saveEvent, removeEvent, refreshEvents: loadEvents,
+      activePopoverEvent, setActivePopoverEvent,
     }}>
       {children}
     </CalendarContext.Provider>

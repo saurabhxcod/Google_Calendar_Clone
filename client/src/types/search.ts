@@ -10,6 +10,8 @@ export interface SearchResult {
   color: string;
   allDay: boolean;
   calendarId: string;
+  isHoliday?: boolean;
+  type?: string[];
 }
 
 export interface SearchState {
