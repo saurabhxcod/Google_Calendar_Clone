@@ -9,8 +9,10 @@ import searchRoutes from './routes/search.routes';
 
 dotenv.config();
 
-// Change DNS
-dns.setServers(["1.1.1.1", "8.8.8.8"]);
+// Change DNS locally if needed
+if (process.env.NODE_ENV !== 'production') {
+    dns.setServers(["1.1.1.1", "8.8.8.8"]);
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
