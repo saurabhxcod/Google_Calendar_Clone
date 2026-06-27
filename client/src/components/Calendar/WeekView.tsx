@@ -1,11 +1,15 @@
 import { useRef, useState, useEffect } from 'react';
 import {
   format, getWeekDays, isToday, isSameDay, parseUTCtoLocal,
-  getEventTop, getEventHeight,
+  getEventTop, getEventHeight, startOfDay, endOfDay,
 } from '../../utils/dateUtils';
 import { useCalendar } from '../../context/CalendarContext';
 import EventPopover from '../Event/EventPopover';
 import type { CalendarEvent } from '../../types';
+import { useHolidayContext } from '../../context/HolidayContext';
+import { filterHolidaysByDateRange } from '../../utils/holidayUtils';
+import { HolidayChip } from '../holidays/HolidayChip';
+import { useCalendarVisibilityContext } from '../../context/CalendarVisibilityContext';
 
 const HOUR_HEIGHT = 48;
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
@@ -50,6 +54,8 @@ function EventBlock({ event, onClick }: { event: CalendarEvent; onClick: (e: Rea
 
 export default function WeekView() {
   const { currentDate, visibleEvents: events, openCreate } = useCalendar();
+  const { holidays } = useHolidayContext();
+  const { isVisible } = useCalendarVisibilityContext();
   const days = getWeekDays(currentDate);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -144,6 +150,13 @@ export default function WeekView() {
               >
                 {e.title}
               </div>
+            ))}
+            {isVisible('holidays') && filterHolidaysByDateRange(
+              holidays,
+              startOfDay(day),
+              endOfDay(day)
+            ).map(holiday => (
+              <HolidayChip key={holiday.id} holiday={holiday} compact={true} />
             ))}
           </div>
         ))}

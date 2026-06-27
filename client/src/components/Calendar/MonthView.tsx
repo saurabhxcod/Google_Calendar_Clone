@@ -1,9 +1,13 @@
 
 import { useState } from 'react';
-import { format, getMonthGrid, isSameDay, isToday, isSameMonth, parseUTCtoLocal } from '../../utils/dateUtils';
+import { format, getMonthGrid, isSameDay, isToday, isSameMonth, parseUTCtoLocal, startOfDay, endOfDay } from '../../utils/dateUtils';
 import { useCalendar } from '../../context/CalendarContext';
 import EventPopover from '../Event/EventPopover';
 import type { CalendarEvent } from '../../types';
+import { useHolidayContext } from '../../context/HolidayContext';
+import { filterHolidaysByDateRange } from '../../utils/holidayUtils';
+import { HolidayChip } from '../holidays/HolidayChip';
+import { useCalendarVisibilityContext } from '../../context/CalendarVisibilityContext';
 
 const DAY_LABELS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
@@ -38,6 +42,8 @@ function EventChip({ event, onClick }: { event: CalendarEvent; onClick: (e: Reac
 
 export default function MonthView() {
   const { currentDate, visibleEvents: events, openCreate } = useCalendar();
+  const { holidays } = useHolidayContext();
+  const { isVisible } = useCalendarVisibilityContext();
   const weeks = getMonthGrid(currentDate);
 
   const [popoverState, setPopoverState] = useState<{
@@ -107,6 +113,13 @@ export default function MonthView() {
                         event={event}
                         onClick={(e) => handleEventClick(e, event)}
                       />
+                    ))}
+                    {isVisible('holidays') && filterHolidaysByDateRange(
+                      holidays,
+                      startOfDay(day),
+                      endOfDay(day)
+                    ).map(holiday => (
+                      <HolidayChip key={holiday.id} holiday={holiday} compact={false} />
                     ))}
                   </div>
 

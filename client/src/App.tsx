@@ -15,7 +15,7 @@ import RegisterModal from './components/Auth/RegisterModal';
 import SearchPage from './pages/SearchPage';
 
 import { CalendarVisibilityProvider } from './context/CalendarVisibilityContext';
-
+import { HolidayProvider } from './context/HolidayContext';
 import { HolidayLoadingBar } from './components/holidays/HolidayLoadingBar';
 
 function CalendarApp() {
@@ -76,11 +76,13 @@ function AuthGate() {
   }
 
   return (
-    <CalendarVisibilityProvider>
-      <CalendarProvider>
-        <CalendarApp />
-      </CalendarProvider>
-    </CalendarVisibilityProvider>
+    <HolidayProvider>
+      <CalendarVisibilityProvider>
+        <CalendarProvider>
+          <CalendarApp />
+        </CalendarProvider>
+      </CalendarVisibilityProvider>
+    </HolidayProvider>
   );
 }
 
